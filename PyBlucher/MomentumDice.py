@@ -1,4 +1,4 @@
-import xdice
+import dice
 
 ##momentumRemaining = int(xdice.roll('3d6'))
 ##
@@ -6,7 +6,7 @@ import xdice
 ##print('Activate by corps')
 ##
 ##while momentumRemaining > 0:
-##    unitsActivated = input('enter number of units activated in this Corp. 0 to end corp activations: ')
+##    unitsActivated = input('enter number of units activated in this Corps. 0 to end corps activations: ')
 ##    unitsActivated = int(unitsActivated)
 ##    if unitsActivated == 0:
 ##        print('Activate by individual units')
@@ -30,14 +30,14 @@ class MomentumDice():
 ##  phase 2 is activate individual units
     def __init__(self):
         
-        self.momentumRemaining = int(xdice.roll('3d6'))
+        self.momentumRemaining = int(dice.roll('3d6'))
         self.momentumPhase = 1
 
-    def ifValidForCorpActive():
-        if self.momentumPhase = 1 and self.momentumRemaining > 0:
-            return true
+    def ifValidForCorpActivate(self):
+        if self.momentumPhase == 1 and self.momentumRemaining > 0:
+            return True
         else:
-            return false
+            return False
 
     def activateCorp(self, unitsActivated):
         unitActivated = int(unitsActivated)
@@ -46,9 +46,18 @@ class MomentumDice():
     def activateUnit(self):
         self.momentumRemaining = self.momentumRemaining - 2
 
-    def turnActive():
+    def turnActive(self):
         if self.momentumRemaining > 0:
-            return true
+            return True
         else:
-            return false
+            return False
+			
+    def getMomentumRemaining(self):
+        return self.momentumRemaining
+		
+		
+    def setCinCActivation(self):
+        self.momentumRemaining = 0
+        return
+		
         
