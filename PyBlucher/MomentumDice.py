@@ -1,29 +1,6 @@
 import dice
 
-##momentumRemaining = int(xdice.roll('3d6'))
-##
-##print('Begin Turn')
-##print('Activate by corps')
-##
-##while momentumRemaining > 0:
-##    unitsActivated = input('enter number of units activated in this Corps. 0 to end corps activations: ')
-##    unitsActivated = int(unitsActivated)
-##    if unitsActivated == 0:
-##        print('Activate by individual units')
-##        while momentumRemaining > 0:
-##            unitActivated = input('y to activate one unit, c to activate by CinC and end turn: ')
-##            if unitActivated == 'y':
-##               momentumRemaining = momentumRemaining - 2
-##            if unitActivated == 'c':
-##               print('CinC activation')
-##               momentumRemaining = 0
-##    else:
-##        momentumRemaining = momentumRemaining - unitsActivated
-##    if momentumRemaining > 0:
-##        print('continue')
-##    else:
-##        print('Turn ended')
-##
+# MomentumDice class is has methods that are applied to a Momntum Dice roll.
 
 class MomentumDice():
 ##  phase 1 is activate by Corp
@@ -46,7 +23,7 @@ class MomentumDice():
     def activateUnit(self):
         self.momentumRemaining = self.momentumRemaining - 2
 
-    def turnActive(self):
+    def ifTurnActive(self):
         if self.momentumRemaining > 0:
             return True
         else:
@@ -56,8 +33,12 @@ class MomentumDice():
         return self.momentumRemaining
 		
 		
-    def setCinCActivation(self):
+    def CinCActivation(self):
         self.momentumRemaining = 0
+        return
+
+    def deactivateCorp(self):
+        self.momentumPhase = 2
         return
 		
         
