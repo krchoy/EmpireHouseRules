@@ -51,7 +51,7 @@ class CAC_Window(QWidget):
         moraleSelectedBN = QPushButton("Morale Selected", self)
         moraleSelectedBN.clicked.connect(self.MoraleSelected)
         setMoraleUI.addWidget(moraleSelectedBN)
-
+        
         self.label_3 = QLabel("inert")
         self.label_3.setAlignment(Qt.AlignmentFlag.AlignBottom)
 
@@ -61,24 +61,27 @@ class CAC_Window(QWidget):
         self.upperPaneUI.addLayout(defenderUI, 0, 2)
         self.upperPaneUI.addWidget(self.label_3, 1, 1)
         self.setLayout(self.upperPaneUI)
-        self.setGeometry(500, 500, 200, 200)
+        self.setGeometry(500, 500, 400, 400)
         self.setWindowTitle('Close Assault Combat')
         self.show()
-
-    def MoraleSelected(self):
-
-#        self.moraleGradeAttacker.hide()
-#        self.moraleGradeDefender.disable()
+##    def AnyMoraleInputs(self, whichSide, whichSideUI ):
         
-        print(self.moraleGradeAttacker.currentText())
-        print(self.moraleGradeAttacker.currentIndex())        
-        print(self.MoraleGrades_Initial_Row[self.moraleGradeAttacker.currentText()])
-        self.label_3.setText(self.moraleGradeAttacker.currentText() + str(self.moraleGradeAttacker.currentIndex()))
-        self.moraleGradeAttackerRowStart = self.MoraleGrades_Initial_Row[self.moraleGradeAttacker.currentIndex()]
+        
+    def MoraleSelected(self):
+##        print(self.moraleGradeAttacker.currentText())
+##        print(self.moraleGradeAttacker.currentIndex())        
+##        print(self.MoraleGrades_Initial_Row[self.moraleGradeAttacker.currentText()])
+        
+        
+        self.moraleGradeAttackerRowStart = self.MoraleGrades_Initial_Row[self.moraleGradeAttacker.currentText()]
         print(self.moraleGradeAttackerRowStart)
         print(self.CloseAssaultCombatTable[self.moraleGradeAttackerRowStart])
         
+        self.moraleGradeDefenderRowStart = self.MoraleGrades_Initial_Row[self.moraleGradeDefender.currentText()]
 
+        
+        self.label_3.setText(str(self.CloseAssaultCombatTable[self.moraleGradeAttackerRowStart]) + " " + str(self.CloseAssaultCombatTable[self.moraleGradeDefenderRowStart]))
+##        
 
 app = QApplication(sys.argv)
 window = CAC_Window()
