@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QSlider, QWidget, QLabel, QComboBox, QHBoxLayout,QVBoxLayout, QGridLayout, QPushButton, QRadioButton
+from PyQt6.QtWidgets import QGroupBox, QButtonGroup, QApplication, QSlider, QWidget, QLabel, QComboBox, QHBoxLayout,QVBoxLayout, QGridLayout, QPushButton, QRadioButton
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
 import sys
@@ -12,8 +12,18 @@ class CAC_Modifiers_UI(QWidget):
         self.setWindowTitle("Close Assault Combat Modifiers")
         self.setWindowIcon(QIcon("icon.jpg"))
 
-        grid = QGridLayout()
+        self.grid = QGridLayout()
 
+        self.CAC_Row1()
+        self.CAC_Row2()
+        self.CAC_Row3()
+        self.CAC_Row4()
+        self.CAC_Row5()
+        
+        self.setLayout(self.grid)
+        self.show()
+
+    def CAC_Row1(self):
         label1 = QLabel("Every 2 figures lost since start of day")
         slider1 = QSlider(Qt.Orientation.Horizontal, self)
         slider1.setGeometry(50,50, 200, 50)
@@ -23,11 +33,11 @@ class CAC_Modifiers_UI(QWidget):
         slider1.setTickInterval(1)
         slider1.valueChanged.connect(self.displaySlider1) 
         self.result1 = QLabel("")
-        grid.addWidget(label1, 0, 0)
-        grid.addWidget(slider1, 0, 1)
-        grid.addWidget(self.result1, 0, 2)
-        
-        
+        self.grid.addWidget(label1, 0, 0)
+        self.grid.addWidget(slider1, 0, 1)
+        self.grid.addWidget(self.result1, 0, 2)
+
+    def CAC_Row2(self):
         label2= QLabel("Every Fatigue Point accumulated")
         slider2 = QSlider(Qt.Orientation.Horizontal, self)
         slider2.setGeometry(50,50, 200, 50)
@@ -37,70 +47,89 @@ class CAC_Modifiers_UI(QWidget):
         slider2.setTickInterval(1)
         slider2.valueChanged.connect(self.displaySlider2) 
         self.result2 = QLabel("")
-        grid.addWidget(label2, 1, 0)
-        grid.addWidget(slider2, 1, 1)
-        grid.addWidget(self.result2, 1, 2)
-
+        self.grid.addWidget(label2, 1, 0)
+        self.grid.addWidget(slider2, 1, 1)
+        self.grid.addWidget(self.result2, 1, 2)
+        
+    def CAC_Row3(self):
         label3 = QLabel("Unit is:")
-        self.radio30 = QRadioButton("Good", self)
-        self.radio31 = QRadioButton("Disordered", self)
-        self.radio32 = QRadioButton("Blown", self)
-        self.radio33 = QRadioButton("Blown & Disordered", self)
-        self.radio34 = QRadioButton("Broken", self)
-        self.radio30.toggled.connect(self.showRadio3Result)
-        self.radio31.toggled.connect(self.showRadio3Result)
-        self.radio32.toggled.connect(self.showRadio3Result)
-        self.radio33.toggled.connect(self.showRadio3Result)
-        self.radio34.toggled.connect(self.showRadio3Result)
-        self.result3 = QLabel("")
-        
         vbox3 = QVBoxLayout()
-        vbox3.addWidget(self.radio30)
-        vbox3.addWidget(self.radio31)
-        vbox3.addWidget(self.radio32)
-        vbox3.addWidget(self.radio33)
-        vbox3.addWidget(self.radio34)
+        label3.setStyleSheet("""color: "black"; background-color: "green";""")
 
-        grid.addWidget(label3, 2, 0)
-        grid.addLayout(vbox3, 2, 1)
-        grid.addWidget(self.result3, 2, 2)
+        TitlesR3 = [
+            'Good',
+            'Disordered',
+            'Blown',
+            'Blown & Disordered',
+            'Broken' ]
+        ButtonsR3 = [QRadioButton(title) for title in TitlesR3]
 
-        label4 = QLabel("Attached Ledership at:")
-        self.radio40 = QRadioButton("None", self)
-        self.radio41 = QRadioButton("Charismatic Div or Brig", self)
-        self.radio42 = QRadioButton("Charismatic Reg or below", self)
-        self.radio43 = QRadioButton("Inspiring Div or Brig", self)
-        self.radio44 = QRadioButton("Inspiring Reg or below", self)
-        self.radio45 = QRadioButton("Fine Unit leader attached to sub unit", self)
-        self.radio46 = QRadioButton("Contemptible Div or Brig", self)
-        self.radio47 = QRadioButton("Contemptible Reg or below", self)
-        self.radio40.toggled.connect(self.showRadio4Result)
-        self.radio41.toggled.connect(self.showRadio4Result)
-        self.radio42.toggled.connect(self.showRadio4Result)
-        self.radio43.toggled.connect(self.showRadio4Result)
-        self.radio44.toggled.connect(self.showRadio4Result)
-        self.radio45.toggled.connect(self.showRadio4Result)
-        self.radio46.toggled.connect(self.showRadio4Result)
-        self.radio47.toggled.connect(self.showRadio4Result)
- 
-        self.result4 = QLabel("")
+        ButtonGroupR3 = QButtonGroup(self)
+        for ButtonR3 in ButtonsR3:
+            vbox3.addWidget(ButtonR3)
+            ButtonR3.toggled.connect(self.showRadio3Result)
+            ButtonGroupR3.addButton(ButtonR3)
+            ButtonR3.setStyleSheet("""color: "black"; background-color: "green";""")
         
+        self.result3 = QLabel("")
+
+        self.grid.addWidget(label3, 2, 0)
+        self.grid.addLayout(vbox3, 2, 1)
+        self.grid.addWidget(self.result3, 2, 2)
+
+    def CAC_Row4(self):
+        label4 = QLabel("Attached Leadership at:")
         vbox4 = QVBoxLayout()
-        vbox4.addWidget(self.radio40)
-        vbox4.addWidget(self.radio41)
-        vbox4.addWidget(self.radio42)
-        vbox4.addWidget(self.radio43)
-        vbox4.addWidget(self.radio44)
-        vbox4.addWidget(self.radio45)
-        vbox4.addWidget(self.radio46)
-        vbox4.addWidget(self.radio47)
-        grid.addWidget(label4, 3, 0)
-        grid.addLayout(vbox4, 3, 1)
-        grid.addWidget(self.result4, 3, 2)
-
+        TitlesR4 = [
+            "None",
+            "Charismatic Div or Brig",
+            "Charismatic Reg or below",
+            "Inspiring Div or Brig",
+            "Inspiring Reg or below",
+            "Fine Unit leader attached to sub unit",
+            "Contemptible Div or Brig",
+            "Contemptible Reg or below"
+            ]
+        ButtonsR4 = [QRadioButton(title) for title in TitlesR4]
+        ButtonGroupR4 = QButtonGroup(self)
         
-        self.setLayout(grid)
-        self.show()
+        for ButtonR4 in ButtonsR4:
+            vbox4.addWidget(ButtonR4)
+            ButtonR4.toggled.connect(self.showRadio4Result)
+            ButtonGroupR4.addButton(ButtonR4)
+
+        self.result4 = QLabel("")
+
+        self.grid.addWidget(label4, 3, 0)
+        self.grid.addLayout(vbox4, 3, 1)
+        self.grid.addWidget(self.result4, 3, 2)
+
+    def CAC_Row5(self):
+
+        label5 = QLabel("Unit is attacking:")
+        label5.setStyleSheet("""color: "black"; background-color: "green";""")
+        vbox5 = QVBoxLayout()
+        TitlesR5 = [
+            "Front",
+            "Flank",
+            "Rear",
+            "with Partial Enfilade",
+            "with Full Enfilade"
+            ]
+        ButtonsR5 = [QRadioButton(title) for title in TitlesR5]
+        ButtonGroupR5 = QButtonGroup(self)
+        
+        for ButtonR5 in ButtonsR5:
+            vbox5.addWidget(ButtonR5)
+            ButtonR5.toggled.connect(self.showRadio5Result)
+            ButtonGroupR5.addButton(ButtonR5)
+            ButtonR5.setStyleSheet("""color: "black"; background-color: "green";""")
+                
+        self.result5 = QLabel("")
+
+        self.grid.addWidget(label5, 4, 0)
+        self.grid.addLayout(vbox5, 4, 1)
+        self.grid.addWidget(self.result5, 4, 2)
 
         
     def displaySlider1(self, result):
@@ -113,8 +142,25 @@ class CAC_Modifiers_UI(QWidget):
         self.result3.setText(str(self.sender().text()))
     def showRadio4Result(self):
         self.result4.setText(str(self.sender().text()))
+    def showRadio5Result(self):
+        self.result5.setText(str(self.sender().text()))
 
 app = QApplication(sys.argv)
 window = CAC_Modifiers_UI()
+
+app.setStyleSheet("""
+    QWidget {
+        background-color: "green";
+        color: "white";
+    }
+    QRadioButton {
+        
+        background-color: "green"
+    }
+    QLineEdit {
+        background-color: "white";
+        color: "black";
+    }
+""")
 window.show()
 sys.exit(app.exec())
