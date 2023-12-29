@@ -19,8 +19,11 @@ class CAC_Modifiers_UI(QWidget):
         self.CAC_Row3()
         self.CAC_Row4()
         self.CAC_Row5()
-##        self.CAC_Row6()
+        self.CAC_Row6()
         self.CAC_Row7()
+        self.CAC_Row8()
+        self.CAC_Row13()
+
         
         self.setLayout(self.grid)
         self.show()
@@ -54,7 +57,7 @@ class CAC_Modifiers_UI(QWidget):
         self.grid.addWidget(self.result2, 1, 2)
         
     def CAC_Row3(self):
-        label3 = QLabel("Unit is:")
+        label3 = QLabel("Unit morale is:")
         vbox3 = QVBoxLayout()
         label3.setStyleSheet("""color: "black"; background-color: "green";""")
         TitlesR3 = [
@@ -63,14 +66,10 @@ class CAC_Modifiers_UI(QWidget):
             'Blown',
             'Blown & Disordered',
             'Broken' ]
-        ButtonsR3 = [QRadioButton(title) for title in TitlesR3]
-        
-        ButtonGroupR3 = QButtonGroup(self)
-        for ButtonR3 in ButtonsR3:
-            vbox3.addWidget(ButtonR3)
-            ButtonR3.toggled.connect(self.showRadio3Result)
-            ButtonGroupR3.addButton(ButtonR3)
-            ButtonR3.setStyleSheet("""color: "black"; background-color: "green";""")
+        ComboBoxR3 = QComboBox(self)
+        ComboBoxR3.addItems(TitlesR3)
+        ComboBoxR3.currentIndexChanged.connect(self.selectionChange3)
+        vbox3.addWidget(ComboBoxR3)
         
         self.result3 = QLabel("")
 
@@ -91,13 +90,10 @@ class CAC_Modifiers_UI(QWidget):
             "Contemptible Div or Brig",
             "Contemptible Reg or below"
             ]
-        ButtonsR4 = [QRadioButton(title) for title in TitlesR4]
-        ButtonGroupR4 = QButtonGroup(self)
-        
-        for ButtonR4 in ButtonsR4:
-            vbox4.addWidget(ButtonR4)
-            ButtonR4.toggled.connect(self.showRadio4Result)
-            ButtonGroupR4.addButton(ButtonR4)
+        ComboBoxR4 = QComboBox(self)
+        ComboBoxR4.addItems(TitlesR4)
+        ComboBoxR4.currentIndexChanged.connect(self.selectionChange4)
+        vbox4.addWidget(ComboBoxR4)
 
         self.result4 = QLabel("")
 
@@ -106,7 +102,6 @@ class CAC_Modifiers_UI(QWidget):
         self.grid.addWidget(self.result4, 3, 2)
 
     def CAC_Row5(self):
-
         label5 = QLabel("Unit is attacking:")
         label5.setStyleSheet("""color: "black"; background-color: "green";""")
         vbox5 = QVBoxLayout()
@@ -117,38 +112,29 @@ class CAC_Modifiers_UI(QWidget):
             "with Partial Enfilade",
             "with Full Enfilade"
             ]
-        ButtonsR5 = [QRadioButton(title) for title in TitlesR5]
-        ButtonGroupR5 = QButtonGroup(self)
-        
-        for ButtonR5 in ButtonsR5:
-            vbox5.addWidget(ButtonR5)
-            ButtonR5.toggled.connect(self.showRadio5Result)
-            ButtonGroupR5.addButton(ButtonR5)
-            ButtonR5.setStyleSheet("""color: "black"; background-color: "green";""")
+        ComboBoxR5 = QComboBox(self)
+        ComboBoxR5.addItems(TitlesR5)
+        ComboBoxR5.currentIndexChanged.connect(self.selectionChange5)
+        vbox5.addWidget(ComboBoxR5)
                 
         self.result5 = QLabel("")
 
         self.grid.addWidget(label5, 4, 0)
         self.grid.addLayout(vbox5, 4, 1)
         self.grid.addWidget(self.result5, 4, 2)
+        
     def CAC_Row6(self):
-        label6 = QLabel("Unit atacking into cover that is:")
+        label6 = QLabel("Formed:")
         vbox6 = QVBoxLayout()
         TitlesR6 = [
-            "None",
-            "Light",
-            "Medium",
-            "Heavy",
-            "Extra Heavy",
-            "Super Heavy",
+            "Not applicable",
+            "... versus Unformed(incl. Gunners)",
             ]
-        ButtonsR6 = [QRadioButton(title) for title in TitlesR6]
-        ButtonGroupR6 = QButtonGroup(self)
-        
-        for ButtonR6 in ButtonsR6:
-            vbox6.addWidget(ButtonR6)
-            ButtonR6.toggled.connect(self.showRadio6Result)
-            ButtonGroupR6.addButton(ButtonR6)
+        ComboBoxR6 = QComboBox(self)
+        ComboBoxR6.addItems(TitlesR6)
+        ComboBoxR6.currentIndexChanged.connect(self.selectionChange6)
+        vbox6.addWidget(ComboBoxR6)
+
 
         self.result6 = QLabel("")
 
@@ -157,26 +143,74 @@ class CAC_Modifiers_UI(QWidget):
         self.grid.addWidget(self.result6, 5, 2)
 
     def CAC_Row7(self):
-        label7 = QLabel("Formed:")
+        label7 = QLabel("Formed Infantry:")
         vbox7 = QVBoxLayout()
         TitlesR7 = [
-            "... versus Unformed(incl. Gunners)",
+            "Not applicable",
             "... Infantry not square or Closed Column versus Closed Column",
             "... Infantry not square or Closed Column versus Square",
             ]
-        ButtonsR7 = [QRadioButton(title) for title in TitlesR7]
-        ButtonGroupR7 = QButtonGroup(self)
-        
-        for ButtonR7 in ButtonsR7:
-            vbox7.addWidget(ButtonR7)
-            ButtonR7.toggled.connect(self.showRadio7Result)
-            ButtonGroupR7.addButton(ButtonR7)
+        ComboBoxR7 = QComboBox(self)
+        ComboBoxR7.addItems(TitlesR7)
+        ComboBoxR7.currentIndexChanged.connect(self.selectionChange7)
+        vbox7.addWidget(ComboBoxR7)
+
 
         self.result7 = QLabel("")
 
         self.grid.addWidget(label7, 6, 0)
         self.grid.addLayout(vbox7, 6, 1)
         self.grid.addWidget(self.result7, 6, 2)
+
+
+    def CAC_Row8(self):
+        label8 = QLabel("Cavalry attacking:")
+        vbox8 = QVBoxLayout()
+        TitlesR8 = [
+            "Not applicable",
+            "Cavalry versus Infantry Closed Column",
+            "Cavalry versus Infantry Square",
+            "Veteran or higher grade Lancers versus Infantry Closed Column",
+            "Veteran or higher grade Lancers versus Infantry Square",
+            "Shock Cavalry versus Regular Cavalry",
+            "Shock Cavalry versus Irregular Cavalry",
+            "Regular Cavalry versus Irregular Cavalry",
+            ]
+        ComboBoxR8 = QComboBox(self)
+        ComboBoxR8.addItems(TitlesR8)
+        ComboBoxR8.currentIndexChanged.connect(self.selectionChange8)
+        vbox8.addWidget(ComboBoxR8)
+
+
+        self.result8 = QLabel("")
+
+        self.grid.addWidget(label8, 7, 0)
+        self.grid.addLayout(vbox8, 7, 1)
+        self.grid.addWidget(self.result8, 7, 2)
+
+    def CAC_Row13(self):
+        label13 = QLabel("Unit atacking into cover that is:")
+        vbox13 = QVBoxLayout()
+        TitlesR13 = [
+            "None",
+            "Light",
+            "Medium",
+            "Heavy",
+            "Extra Heavy",
+            "Super Heavy",
+            ]
+        ComboBoxR13 = QComboBox(self)
+        ComboBoxR13.addItems(TitlesR13)
+        ComboBoxR13.currentIndexChanged.connect(self.selectionChange13)
+        vbox13.addWidget(ComboBoxR13)
+
+        self.result13 = QLabel("")
+
+        self.grid.addWidget(label13, 12, 0)
+        self.grid.addLayout(vbox13, 12, 1)
+        self.grid.addWidget(self.result13, 12, 2)
+
+        
         
     def displaySlider1(self, result):
         self.result1.setText(str(self.sender().value()))
@@ -184,16 +218,21 @@ class CAC_Modifiers_UI(QWidget):
     def displaySlider2(self, result):
         self.result2.setText(str(self.sender().value()))
         self.result2.adjustSize()
-    def showRadio3Result(self):
-        self.result3.setText(str(self.sender().text()))
-    def showRadio4Result(self):
-        self.result4.setText(str(self.sender().text()))
-    def showRadio5Result(self):
-        self.result5.setText(str(self.sender().text()))
-    def showRadio6Result(self):
-        self.result6.setText(str(self.sender().text()))
-    def showRadio7Result(self):
-        self.result7.setText(str(self.sender().text()))
+    def selectionChange3(self):
+        self.result3.setText(str(self.sender().currentText()))
+    def selectionChange4(self):
+        self.result4.setText(str(self.sender().currentText()))
+    def selectionChange5(self):
+        self.result5.setText(str(self.sender().currentText()))
+    def selectionChange6(self):
+        self.result6.setText(str(self.sender().currentText()))
+    def selectionChange7(self):
+        self.result7.setText(str(self.sender().currentText()))
+    def selectionChange8(self):
+        self.result8.setText(str(self.sender().currentText()))
+    def selectionChange13(self):
+        self.result13.setText(str(self.sender().currentText()))
+
 
 app = QApplication(sys.argv)
 window = CAC_Modifiers_UI()
