@@ -19,6 +19,8 @@ class CAC_Modifiers_UI(QWidget):
         self.CAC_Row3()
         self.CAC_Row4()
         self.CAC_Row5()
+##        self.CAC_Row6()
+        self.CAC_Row7()
         
         self.setLayout(self.grid)
         self.show()
@@ -55,7 +57,6 @@ class CAC_Modifiers_UI(QWidget):
         label3 = QLabel("Unit is:")
         vbox3 = QVBoxLayout()
         label3.setStyleSheet("""color: "black"; background-color: "green";""")
-
         TitlesR3 = [
             'Good',
             'Disordered',
@@ -63,7 +64,7 @@ class CAC_Modifiers_UI(QWidget):
             'Blown & Disordered',
             'Broken' ]
         ButtonsR3 = [QRadioButton(title) for title in TitlesR3]
-
+        
         ButtonGroupR3 = QButtonGroup(self)
         for ButtonR3 in ButtonsR3:
             vbox3.addWidget(ButtonR3)
@@ -130,7 +131,52 @@ class CAC_Modifiers_UI(QWidget):
         self.grid.addWidget(label5, 4, 0)
         self.grid.addLayout(vbox5, 4, 1)
         self.grid.addWidget(self.result5, 4, 2)
+    def CAC_Row6(self):
+        label6 = QLabel("Unit atacking into cover that is:")
+        vbox6 = QVBoxLayout()
+        TitlesR6 = [
+            "None",
+            "Light",
+            "Medium",
+            "Heavy",
+            "Extra Heavy",
+            "Super Heavy",
+            ]
+        ButtonsR6 = [QRadioButton(title) for title in TitlesR6]
+        ButtonGroupR6 = QButtonGroup(self)
+        
+        for ButtonR6 in ButtonsR6:
+            vbox6.addWidget(ButtonR6)
+            ButtonR6.toggled.connect(self.showRadio6Result)
+            ButtonGroupR6.addButton(ButtonR6)
 
+        self.result6 = QLabel("")
+
+        self.grid.addWidget(label6, 5, 0)
+        self.grid.addLayout(vbox6, 5, 1)
+        self.grid.addWidget(self.result6, 5, 2)
+
+    def CAC_Row7(self):
+        label7 = QLabel("Formed:")
+        vbox7 = QVBoxLayout()
+        TitlesR7 = [
+            "... versus Unformed(incl. Gunners)",
+            "... Infantry not square or Closed Column versus Closed Column",
+            "... Infantry not square or Closed Column versus Square",
+            ]
+        ButtonsR7 = [QRadioButton(title) for title in TitlesR7]
+        ButtonGroupR7 = QButtonGroup(self)
+        
+        for ButtonR7 in ButtonsR7:
+            vbox7.addWidget(ButtonR7)
+            ButtonR7.toggled.connect(self.showRadio7Result)
+            ButtonGroupR7.addButton(ButtonR7)
+
+        self.result7 = QLabel("")
+
+        self.grid.addWidget(label7, 6, 0)
+        self.grid.addLayout(vbox7, 6, 1)
+        self.grid.addWidget(self.result7, 6, 2)
         
     def displaySlider1(self, result):
         self.result1.setText(str(self.sender().value()))
@@ -144,6 +190,10 @@ class CAC_Modifiers_UI(QWidget):
         self.result4.setText(str(self.sender().text()))
     def showRadio5Result(self):
         self.result5.setText(str(self.sender().text()))
+    def showRadio6Result(self):
+        self.result6.setText(str(self.sender().text()))
+    def showRadio7Result(self):
+        self.result7.setText(str(self.sender().text()))
 
 app = QApplication(sys.argv)
 window = CAC_Modifiers_UI()
