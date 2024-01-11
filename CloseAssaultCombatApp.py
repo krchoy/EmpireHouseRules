@@ -1,6 +1,8 @@
 from PyQt6.QtWidgets import QApplication, QVBoxLayout, QWidget, QLabel, QComboBox, QHBoxLayout, QGridLayout, QPushButton
 from PyQt6.QtGui import QIcon
 from PyQt6.QtCore import Qt
+from CombatantEntry import *
+
 import sys
  
 class CAC_Window(QWidget):
@@ -29,24 +31,23 @@ class CAC_Window(QWidget):
         
         self.setWindowTitle("Close Assault Combat")
         self.setWindowIcon(QIcon("icon.jpg"))
- 
-        attackerUI = QVBoxLayout()
-        label_1 = QLabel("Attacker Morale Grade")
-        label_1.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.moraleGradeAttacker = QComboBox(self)
-        self.moraleGradeAttacker.addItems(self.MoraleGrades)
-        attackerUI.addWidget(label_1)
-        attackerUI.addWidget(self.moraleGradeAttacker)
+        AttackModifier=0
+        attacker = CombatantEntry(self, "Attacker", AttackModifier)
+        print(attacker)
+        DefendModifier=0
+        defender = CombatantEntry(self, "Defender", DefendModifier)
+        print(defender)
+        
 
         
-        defenderUI = QVBoxLayout()
-        label_2 = QLabel("Defender Morale Grade")
-        label_2.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.moraleGradeDefender = QComboBox(self)
-        self.moraleGradeDefender.addItems(self.MoraleGrades)
-        defenderUI.addWidget(label_2)
-        defenderUI.addWidget(self.moraleGradeDefender)
-
+##        defenderUI = QVBoxLayout()
+##        label_2 = QLabel("Defender Morale Grade")
+##        label_2.setAlignment(Qt.AlignmentFlag.AlignTop)
+##        self.moraleGradeDefender = QComboBox(self)
+##        self.moraleGradeDefender.addItems(self.MoraleGrades)
+##        defenderUI.addWidget(label_2)
+##        defenderUI.addWidget(self.moraleGradeDefender)
+##
         setMoraleUI = QVBoxLayout()
         moraleSelectedBN = QPushButton("Morale Selected", self)
         moraleSelectedBN.clicked.connect(self.MoraleSelected)
@@ -55,16 +56,24 @@ class CAC_Window(QWidget):
         self.label_3 = QLabel("inert")
         self.label_3.setAlignment(Qt.AlignmentFlag.AlignBottom)
 
+
+##        Attacker_Modifiers = self.CAC_UI("Attacker")
+##
+##        Defender_Modifiers = self.CAC_UI("Defender")
+##        
+
         self.upperPaneUI = QGridLayout()        
-        self.upperPaneUI.addLayout(attackerUI, 0, 0)
+        self.upperPaneUI.addLayout(attacker, 0, 0)
         self.upperPaneUI.addLayout(setMoraleUI, 0, 1)
-        self.upperPaneUI.addLayout(defenderUI, 0, 2)
-        self.upperPaneUI.addWidget(self.label_3, 1, 1)
+        self.upperPaneUI.addLayout(defender, 0, 2)
+##        self.upperPaneUI.addWidget(Attacker_Modifiers, 1, 0)
+##        self.upperPaneUI.addWidget(Defender_Modifiers, 1, 2)
+        self.upperPaneUI.addWidget(self.label_3, 2, 1)
         self.setLayout(self.upperPaneUI)
         self.setGeometry(500, 500, 400, 400)
         self.setWindowTitle('Close Assault Combat')
         self.show()
-##    def AnyMoraleInputs(self, whichSide, whichSideUI ):
+
         
         
     def MoraleSelected(self):
@@ -81,7 +90,33 @@ class CAC_Window(QWidget):
 
         
         self.label_3.setText(str(self.CloseAssaultCombatTable[self.moraleGradeAttackerRowStart]) + " " + str(self.CloseAssaultCombatTable[self.moraleGradeDefenderRowStart]))
-##        
+
+    def CAC_UI(self, combatant):
+       print(combatant)
+##        self.setWindowTitle("Close Assault Combat Modifiers")
+##        self.setWindowIcon(QIcon("icon.jpg"))
+
+##        self.grid = QGridLayout()
+##
+##        self.CAC_Row1()
+##        self.CAC_Row2()
+##        self.CAC_Row3()
+##        self.CAC_Row4()
+##        self.CAC_Row5()
+##        self.CAC_Row6()
+##        self.CAC_Row7()
+##        self.CAC_Row8()
+##        self.CAC_Row9()
+##        self.CAC_Row10()
+##        self.CAC_Row11()
+##        self.CAC_Row12()
+##        self.CAC_Row13()
+##        self.CAC_Row14()
+##        self.CAC_Row15()
+        
+##        self.setLayout(self.grid)
+##        self.show()
+        
 
 app = QApplication(sys.argv)
 window = CAC_Window()

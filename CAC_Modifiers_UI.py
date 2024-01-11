@@ -31,7 +31,7 @@ class CAC_Modifiers_UI(QWidget):
         self.CAC_Row15()
         
         self.setLayout(self.grid)
-        self.show()
+##        self.show()
 
     def CAC_Row1(self):
         label1 = QLabel("Every 2 figures lost since start of day")
@@ -255,7 +255,7 @@ class CAC_Modifiers_UI(QWidget):
 
     def CAC_Row12(self):
         label12 = QLabel("Infantry:")
-        label12.setStyleSheet("""color: "black"; background-color: "steelblue";""")
+        label12.setStyleSheet("""color: "black"; background-color: "steelgrey";""")
         vbox12 = QVBoxLayout()
         TitlesR12 = [
             "with no advantages",
@@ -369,22 +369,22 @@ class CAC_Modifiers_UI(QWidget):
         self.result15.setText(str(self.sender().currentText()))
 
 
-app = QApplication(sys.argv)
-window = CAC_Modifiers_UI()
+##app = QApplication(sys.argv)
+##window = CAC_Modifiers_UI()
 
-app.setStyleSheet("""
-    QWidget {
-        background-color: "seashell";
-        color: "black";
-    }
-    QComboBox {
-        
-        background-color: "seashell"
-    }
-    QLineEdit {
-        background-color: "white";
-        color: "black";
-    }
-""")
-window.show()
-sys.exit(app.exec())
+##app.setStyleSheet("""
+##    QWidget {
+##        background-color: "seashell";
+##        color: "black";
+##    }
+##    QComboBox {
+##        
+##        background-color: "seashell"
+##    }
+##    QLineEdit {
+##        background-color: "white";
+##        color: "black";
+##    }
+##""")
+##window.show()
+##sys.exit(app.exec())
